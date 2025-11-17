@@ -1,7 +1,3 @@
-/*
-   ОСНОВНЫЕ СТИЛИ
-*/
-
 body {
     font-family: Arial, sans-serif;
     transition: background 0.3s, color 0.3s;
@@ -141,4 +137,3 @@ header.scrolled {
     opacity: 1;
     transform: translateY(0);
 }
-
