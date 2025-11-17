@@ -51,15 +51,13 @@ window.addEventListener("scroll", () => {
     }
 });
 // тёмная тема
-const themeToggle = document.createElement("button");
-themeToggle.textContent = "🌙";
-themeToggle.className = "theme-toggle";
-document.body.appendChild(themeToggle);
+const toggle = document.getElementById("themeToggle");
+const body = document.body;
 
-themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
+toggle.addEventListener("click", () => {
+    body.classList.toggle("dark-theme");
 
-    themeToggle.textContent =
-        document.body.classList.contains("dark") ? "☀️" : "🌙";
+    toggle.textContent = body.classList.contains("dark-theme") ? "☀️" : "🌙";
+
 });
 

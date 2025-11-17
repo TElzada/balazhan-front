@@ -1,144 +1,199 @@
-/*
-   ОСНОВНЫЕ СТИЛИ
-*/
+/* ===== ГЛОБАЛЬНЫЕ НАСТРОЙКИ ===== */
 
 body {
-    font-family: Arial, sans-serif;
-    transition: background 0.3s, color 0.3s;
+    font-family: 'Inter', sans-serif;
+    background: #FEFEF2;        /* Pure Light */
+    color: #3a3a3a;
+    margin: 0;
+    padding: 0;
+    transition: 0.3s;
 }
 
-/* анимация карточек */
+/* ===== HEADER ===== */
+
+header.navbar {
+    background: #929FC1 !important; /* Serenity Blue */
+    box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+    padding: 15px 0;
+}
+
+.nav-link {
+    color: white !important;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.nav-link:hover {
+    color: #F2D965 !important; /* Golden Custard */
+}
+
+/* ===== ТЕКСТЫ ===== */
+
+.section-title {
+    font-size: 38px;
+    font-weight: 800;
+    color: #929FC1;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* ===== КАРТОЧКИ ===== */
 
 .card {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: 0.6s ease;
+    border: none;
+    border-radius: 20px;
+    background: #ffffff;
+    padding-bottom: 20px;
+
+    /* мягкая, НЕ стеклянная тень */
+    box-shadow:
+        0 6px 18px rgba(0,0,0,0.12);
+
+    transition: 0.25s ease;
 }
 
-.card.show {
-    opacity: 1;
-    transform: translateY(0);
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.18);
 }
 
-/*
-   кнопка "наверх" */
+.card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #4b4b4b;
+}
 
+.card-text {
+    color: #555;
+}
+
+.card-footer {
+    background: none !important;
+    border: none;
+    padding-top: 10px;
+}
+
+/* ===== КНОПКИ ===== */
+
+.btn-outline-primary {
+    background: #F2D965;  /* Golden Custard */
+    color: #000 !important;
+    font-weight: 700;
+    border: none;
+    border-radius: 14px;
+    padding: 10px 22px;
+
+    transition: 0.2s;
+}
+
+.btn-outline-primary:hover {
+    background: #929FC1; /* Serenity Blue */
+    color: white !important;
+    transform: scale(1.06);
+}
+
+/* ===== FOOTER ===== */
+
+.footer {
+    background: #929FC1;
+    color: white;
+    padding: 40px 0;
+    margin-top: 60px;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
+}
+
+.footer a {
+    color: #F2D965;
+    font-weight: 600;
+}
+
+
+
+
+/* === КНОПКА НАВЕРХ === */
 .to-top-btn {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    padding: 12px 16px;
-    font-size: 20px;
-    background: #0d6efd;
+    padding: 14px 18px;
+    background: #6c5ce7;
+    border-radius: 50%;
     color: white;
     border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
     transition: 0.3s;
-    z-index: 1000;
-    display: none;
 }
-
 .to-top-btn:hover {
     transform: scale(1.1);
 }
 
-
-header.scrolled {
-    background: rgba(255, 255, 255, 0.95) !important;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: 0.3s;
-}
-
-/*
-   тёмная тема
- */
-
-.dark {
-    background: #121212;
-    color: white;
-}
-
-/* Карточки */
-.dark .card {
-    background: #1e1e1e;
-    color: white;
-    border-color: #333;
-}
-
-/* Navbar */
-.dark .navbar,
-.dark header.scrolled {
-    background: #222 !important;
-}
-.dark .nav-link {
-    color: white !important;
-}
-.dark .nav-link:hover {
-    color: #0d6efd !important;
-}
-
-/* Кнопки “Подробнее” */
-.dark .btn-outline-primary {
-    color: black !important;
-    border-color: #444 !important;
-}
-.dark .btn-outline-primary:hover {
-    background: #fff !important;
-    color: black !important;
-    border-color: #fff !important;
-}
-
-/* Текст внутри карточек */
-.dark .card-body,
-.dark .card-title,
-.dark .card-text {
-    color: white !important;
-}
-
-
-.dark * {
-    transition: background 0.3s, color 0.3s;
-}
-
-/*
-   кнопка темной/светлой темы
- */
-
+/* Кнопка смены темы в хедере */
 .theme-toggle {
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
-    padding: 10px 14px;
-    font-size: 18px;
-    border-radius: 50%;
+    margin-left: 20px;
     border: none;
-    background: #0d6efd;
-    color: white;
+    background: #929FC1; /* Serenity Blue */
+    color: #FEFEF2;       /* Pure Light */
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    z-index: 1000;
-    transition: 0.3s;
+    font-size: 18px;
+    transition: 0.25s;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12); /* лёгкая 3D тень */
 }
 
 .theme-toggle:hover {
-    transform: scale(1.1);
+    background: #F2D965;   /* Golden Custard */
+    color: #929FC1;
+    transform: translateY(-2px);
 }
 
 
-.hero img {
-    transition: opacity 0.4s ease;
+/* === АНИМАЦИЯ === */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.about-section {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: 0.6s ease;
+
+/* 🌙 Dark Theme */
+.dark-theme {
+    background-color: #3B3F54; /* мягкий фиолетово-серый */
+    color: #FEFEF2;
 }
 
-.about-section.show {
-    opacity: 1;
-    transform: translateY(0);
+.dark-theme header {
+    background: #2C2F3E;
 }
+
+.dark-theme .card {
+    background: #4A4F69;
+    color: #FEFEF2;
+    box-shadow: 6px 6px 16px rgba(0,0,0,0.35),
+                -6px -6px 16px rgba(255,255,255,0.06);
+}
+.dark-theme .card-text {
+    color: #FFFFFF  ;
+}
+.dark-theme .card-title {
+    color: #FFFFFF  ;
+}
+
+.dark-theme .btn {
+    background: #F2D965;
+    color: #3B3F54;
+}
+
+.dark-theme .nav-link {
+    color: #FEFEF2 !important;
+}
+
+
 

@@ -34,15 +34,13 @@ toTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Темная тема
-const themeToggle = document.createElement("button");
-themeToggle.textContent = "🌙";
-themeToggle.className = "theme-toggle";
-document.body.appendChild(themeToggle);
+// тёмная тема
+const toggle = document.getElementById("themeToggle");
+const body = document.body;
 
-themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
+toggle.addEventListener("click", () => {
+    body.classList.toggle("dark-theme");
 
-    themeToggle.textContent =
-        document.body.classList.contains("dark") ? "☀️" : "🌙";
+    toggle.textContent = body.classList.contains("dark-theme") ? "☀️" : "🌙";
+
 });
