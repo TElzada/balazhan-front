@@ -6,7 +6,7 @@
     <title>Конкурсы для педагогов | Кыялга Кадам</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="../styles/style.css">
 </head>
 <body>
 <header class="navbar navbar-expand-lg sticky-top bg-white shadow-sm">
@@ -35,59 +35,44 @@
 <main class="container my-5">
     <h2 class="text-center mb-4">Актуальные конкурсы</h2>
     <div class="row g-4">
-
-        <!-- КАРТОЧКА 1 -->
-        <div class="col-md-6 col-lg-4" id="teacherContest">
+        <div class="col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm">
-                <img src="img/teacher1.jpg" class="card-img-top" alt="Лучший педагог года">
+                <img src="../images/teacher1.jpg" class="card-img-top" alt="Лучший педагог года">
                 <div class="card-body">
                     <h5 class="card-title">Лучший педагог дополнительного образования</h5>
-                    <p class="card-text">
-                        Цель конкурса – повышение профессионального мастерства работников организаций дополнительного
-                        образования и создания эффективных условий непрерывного профессионального развития, творческого, карьерного роста и распространение педагогического опыта.
-                    </p>
+                    <p class="card-text">Цель конкурса – повышение профессионального мастерства работников организаций дополнительного образования и создания эффективных условий непрерывного профессионального
+                        развития, творческого, карьерного роста и распространение педагогического опыта.</p>
                 </div>
                 <div class="card-footer text-center bg-white">
-                    <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#teachersModal1">Подробнее</a>
+                    <!-- <a href="#" class="btn btn-outline-primary">Подробнее</a> -->
+                    <!-- Кнопка -->
+                    <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#childrenModal">Подробнее</a>
 
-                    <!-- МОДАЛЬНОЕ ОКНО 1 -->
-                    <div class="modal fade" id="teachersModal1" tabindex="-1" aria-labelledby="teachersModalLabel1" aria-hidden="true">
+                    <!-- Модальное окно -->
+                    <div class="modal fade" id="childrenModal" tabindex="-1" aria-labelledby="childrenModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
-
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="teachersModalLabel1">Рисуем будущее</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    <h5 class="modal-title" id="childrenModalLabel">Рисуем будущее</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                                 </div>
-
                                 <div class="modal-body">
-
                                     <h5>Участники конкурса</h5>
-                                    <p>Педагоги по всем направлениям дополнительного образования детей:</p>
-                                    <ul style="list-style:none; padding-left:0;">
-                                        <li>— художественно-эстетического</li>
-                                        <li>— туристско-краеведческого</li>
-                                        <li>— технического</li>
-                                        <li>— физкультурно-спортивного</li>
-                                        <li>— социально-педагогического направления</li>
-                                    </ul>
-
+                                    <p>  В конкурсе принимают участие педагоги по всем направлениям дополнительного образования детей: художественно-эстетического,
+                                        туристско-краеведческого, технического, физкультурно-спортивного, социально-педагогического (работа с детьми с ОВЗ, группы риска,
+                                        сиротами, детских общественных организаций, лидерами, волонтерами и т.д.).</p>
                                     <h5>Конкурс проводится в три этапа:</h5>
-                                    <ul style="list-style:none; padding-left:0;">
-                                        <li>— первый этап – районный (20–30 мая 2025 г.)</li>
-                                        <li>— второй этап – областной (10–17 октября 2025 г.)</li>
-                                        <li>— третий этап – республиканский (12–14 ноября 2025 г.)</li>
-                                    </ul>
-
-                                    <p>*Все участники дают согласие на размещение данных (ФИО, фото) на сайте и в СМИ.</p>
-
-                                    <img src="img/children2.jpg" class="img-fluid" alt="">
+                                    <p> - первый этап – районный проводится с 20 по 30-мая 2025 г.;
+                                        - второй этап – областной, с 10 по 17 октября 2025 г.;
+                                        - третий этап – республиканский, проводится с 12 по 14 ноября 2025 г.
+                                        *Все участники Конкурса дают свое согласие на размещение своих данных: имени, фамилии, отчества и изображения
+                                        (фотографии) на сайте организатора Конкурса, а также в печатных изданиях, радио и телевизионных передачах, в Интернет-СМИ
+                                        и иных средствах массового распространения информации, включая (без ограничений) Instagram, YouTube, Facebook.</p>
+                                    <img src="img/children2.jpg" class="img-fluid" alt="Рисуем будущее">
                                 </div>
-
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -96,120 +81,88 @@
             </div>
         </div>
 
-        <!-- КАРТОЧКА 2 -->
-        <div class="col-md-6 col-lg-4" id="MethodicCase">
+        <div class="col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm">
-                <img src="img/teacher2.jpg" class="card-img-top" alt="Методический конкурс">
+                <img src="../images/teacher2.jpg" class="card-img-top" alt="Методический конкурс">
                 <div class="card-body">
                     <h5 class="card-title">Методический кейс</h5>
-                    <p class="card-text">
-                        Цель конкурса — выявление лучших методических кейсов педагогов дополнительного образования и повышение мотивации профессионального роста.
-                    </p>
+                    <p class="card-text">Конкурс по разработке методических материалов и инновационных форм работы с детьми.</p>
                 </div>
                 <div class="card-footer text-center bg-white">
-                    <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#teachersModal2">Подробнее</a>
+                    <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#childrenModal">Подробнее</a>
 
-                    <!-- МОДАЛЬНОЕ ОКНО 2 -->
-                    <div class="modal fade" id="teachersModal2" tabindex="-1" aria-labelledby="teachersModalLabel2" aria-hidden="true">
+                    <!-- Модальное окно -->
+                    <div class="modal fade" id="childrenModal" tabindex="-1" aria-labelledby="childrenModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
-
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="teachersModalLabel2">Рисуем будущее</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    <h5 class="modal-title" id="childrenModalLabel">Рисуем будущее</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                                 </div>
-
                                 <div class="modal-body">
-
                                     <h5>Участники конкурса</h5>
-                                    <ul style="list-style:none; padding-left:0;">
-                                        <li>— педагоги организаций дополнительного образования детей Кыргызской Республики.</li>
-                                    </ul>
-
+                                    <p>  В конкурсе принимают участие педагоги по всем направлениям дополнительного образования детей: художественно-эстетического,
+                                        туристско-краеведческого, технического, физкультурно-спортивного, социально-педагогического (работа с детьми с ОВЗ, группы риска,
+                                        сиротами, детских общественных организаций, лидерами, волонтерами и т.д.).</p>
                                     <h5>Конкурс проводится в три этапа:</h5>
-                                    <ul style="list-style:none; padding-left:0;">
-                                        <li>— 1 заочный этап — профессиональная экспертиза методических кейсов - 20 октября - 25-октября на районном/городском уровне, 25-октября - 05 ноября 2024 г. Областные координаторы отбирают по 2 победителя из области;</li>
-                                        <li>— Объявление и публикация результатов 1 заочного этапа Конкурса -
-                                            06 ноября 2024 г. Отбор 18 победителей на 2 республиканский этап;</li>
-                                        <li>— 2 республиканский этап онлайн-конкурса, экспертиза методических
-                                            кейсов победителей 1 заочного этапа - 10-20 ноября 2024 г.</li>
-                                        <li>— 3 республиканский этап конкурса, онлайн-защита методических
-                                            кейсов победителей 2 республиканского этапа - 22 ноября 2024г.</li>
-                                        <li>— Объявление и публикация победителей 3 республиканского этапа -
-                                            22 ноября 2024 г.</li>
-                                    </ul>
-
-                                    <p>Для участия в онлайн-конкурсе участники отправляют материалы на почту balajan@mail.ru. </p>
-
-                                    <img src="img/children2.jpg" class="img-fluid" alt="">
+                                    <p> - первый этап – районный проводится с 20 по 30-мая 2025 г.;
+                                        - второй этап – областной, с 10 по 17 октября 2025 г.;
+                                        - третий этап – республиканский, проводится с 12 по 14 ноября 2025 г.
+                                        *Все участники Конкурса дают свое согласие на размещение своих данных: имени, фамилии, отчества и изображения
+                                        (фотографии) на сайте организатора Конкурса, а также в печатных изданиях, радио и телевизионных передачах, в Интернет-СМИ
+                                        и иных средствах массового распространения информации, включая (без ограничений) Instagram, YouTube, Facebook.</p>
+                                    <img src="img/children2.jpg" class="img-fluid" alt="Рисуем будущее">
                                 </div>
-
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
-        <!-- КАРТОЧКА 3 -->
-        <div class="col-md-6 col-lg-4" id="DevelopmentProgram">
+        <div class="col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm">
-                <img src="img/teacher2.jpg" class="card-img-top" alt="Программа развития">
+                <img src="../images/teacher2.jpg" class="card-img-top" alt="Методический конкурс">
                 <div class="card-body">
                     <h5 class="card-title">Программа развития</h5>
-                    <p class="card-text">lorem ipsum</p>
+                    <p class="card-text">lorem ispum</p>
                 </div>
                 <div class="card-footer text-center bg-white">
-                    <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#teachersModal3">Подробнее</a>
+                    <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#childrenModal">Подробнее</a>
 
-                    <!-- МОДАЛЬНОЕ ОКНО 3 -->
-                    <div class="modal fade" id="teachersModal3" tabindex="-1" aria-labelledby="teachersModalLabel3" aria-hidden="true">
+                    <!-- Модальное окно -->
+                    <div class="modal fade" id="childrenModal" tabindex="-1" aria-labelledby="childrenModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
-
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="teachersModalLabel3">Рисуем будущее</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    <h5 class="modal-title" id="childrenModalLabel">Рисуем будущее</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                                 </div>
-
                                 <div class="modal-body">
-
                                     <h5>Участники конкурса</h5>
-                                    <ul style="list-style:none; padding-left:0;">
-                                        <li>— художественно-эстетического направления</li>
-                                        <li>— туристско-краеведческого</li>
-                                        <li>— технического</li>
-                                        <li>— физкультурно-спортивного</li>
-                                        <li>— социально-педагогического</li>
-                                    </ul>
-
+                                    <p>  В конкурсе принимают участие педагоги по всем направлениям дополнительного образования детей: художественно-эстетического,
+                                        туристско-краеведческого, технического, физкультурно-спортивного, социально-педагогического (работа с детьми с ОВЗ, группы риска,
+                                        сиротами, детских общественных организаций, лидерами, волонтерами и т.д.).</p>
                                     <h5>Конкурс проводится в три этапа:</h5>
-                                    <ul style="list-style:none; padding-left:0;">
-                                        <li>— районный этап (20–30 мая 2025 г.)</li>
-                                        <li>— областной этап (10–17 октября 2025 г.)</li>
-                                        <li>— республиканский финал (12–14 ноября 2025 г.)</li>
-                                    </ul>
-
-                                    <img src="img/children2.jpg" class="img-fluid" alt="">
+                                    <p> - первый этап – районный проводится с 20 по 30-мая 2025 г.;
+                                        - второй этап – областной, с 10 по 17 октября 2025 г.;
+                                        - третий этап – республиканский, проводится с 12 по 14 ноября 2025 г.
+                                        *Все участники Конкурса дают свое согласие на размещение своих данных: имени, фамилии, отчества и изображения
+                                        (фотографии) на сайте организатора Конкурса, а также в печатных изданиях, радио и телевизионных передачах, в Интернет-СМИ
+                                        и иных средствах массового распространения информации, включая (без ограничений) Instagram, YouTube, Facebook.</p>
+                                    <img src="img/children2.jpg" class="img-fluid" alt="Рисуем будущее">
                                 </div>
-
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
     </div>
 </main>
 
