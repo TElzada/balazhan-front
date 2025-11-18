@@ -6,8 +6,8 @@
     "excerpt": "lorem ispum",
     "imageUrl": "../images/expo.png",
     "category": "teacher",
-    "startDate": "2025-11-01T00:00:00Z",
-    "endDate": "2025-12-15T00:00:00Z",
+    "startDate": "2025-11-01",
+    "endDate": "2025-12-15",
     "stages": [
       {"title":"Прием заявок","date":"2025-11-01","description":"Прием заявок до 15 ноября."},
       {"title":"Отборочный тур","date":"2025-11-20","description":"Описание отбора..."},
