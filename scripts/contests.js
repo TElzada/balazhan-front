@@ -3,6 +3,26 @@
     const DATA_URL = 'data/contests.json';
     const PAGE_SIZE = 6;
 
+    // ==== БЛОК ДЛЯ ПОДКЛЮЧЕНИЯ К БЭКУ (КОНКУРСЫ) ====
+    const API_BASE = 'http://localhost:8080'; // при необходимости поменяешь на свой домен/порт
+
+    // Получить конкурсы с бэка (Spring)
+    async function loadContestsFromBackend() {
+        try {
+            const res = await fetch(`${API_BASE}/api/contests`);
+            if (!res.ok) {
+                throw new Error('Ошибка загрузки конкурсов: ' + res.status);
+            }
+            const data = await res.json();
+            // ожидаем массив, на всякий случай проверяем
+            return Array.isArray(data) ? data : [];
+        } catch (e) {
+            console.error(e);
+            return [];
+        }
+    }
+    // ==== КОНЕЦ БЛОКА БЭКА ====
+
     let allContests = [];
     let filtered = [];
     let visibleCount = PAGE_SIZE;
@@ -15,9 +35,16 @@
 
     async function loadData() {
         try {
-            const res = await fetch(DATA_URL);
-            if (!res.ok) throw new Error('Не удалось загрузить ' + DATA_URL);
-            allContests = await res.json();
+            // 👉 сначала пробуем взять данные с бэка
+            allContests = await loadContestsFromBackend();
+
+            // 👉 если бэк вернул пусто (или упал) — используем старый JSON как запас
+            if (!allContests.length) {
+                const res = await fetch(DATA_URL);
+                if (!res.ok) throw new Error('Не удалось загрузить ' + DATA_URL);
+                allContests = await res.json();
+            }
+
             applyFilters();
         } catch (e) {
             grid.innerHTML = '<p class="text-danger">Не удалось загрузить данные.</p>';
