@@ -61,23 +61,26 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        newsList.forEach(n => {
+        newsList.forEach((n, index) => {
             const tr = document.createElement("tr");
 
             const displayDate = formatDateForTable(n);
 
             tr.innerHTML = `
-                <td>${n.id}</td>
-                <td>${escapeHtml(n.title)}</td>
-                <td>${displayDate}</td>
-                <td>
-                    <button class="btn btn-sm btn-outline-primary me-2" data-action="edit" data-id="${n.id}">Редактировать</button>
-                    <button class="btn btn-sm btn-outline-danger" data-action="delete" data-id="${n.id}">Удалить</button>
-                </td>
-            `;
+            <td>${index + 1}</td>   <!-- красивый номер -->
+            <td>${escapeHtml(n.title)}</td>
+            <td>${displayDate}</td>
+            <td>
+                <button class="btn btn-sm btn-outline-primary me-2"
+                        data-action="edit" data-id="${n.id}">Редактировать</button>
+                <button class="btn btn-sm btn-outline-danger"
+                        data-action="delete" data-id="${n.id}">Удалить</button>
+            </td>
+        `;
 
             tableBody.appendChild(tr);
         });
+
     }
 
     // пытаемся аккуратно вытащить дату

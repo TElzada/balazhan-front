@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (res.ok) {
                 // успех — идём в админку
-                window.location.href = "admin-contests.html";
+                window.location.href = "admin-dashboard.html";
                 return;
             }
 

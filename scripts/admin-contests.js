@@ -65,24 +65,27 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        contests.forEach(c => {
+        contests.forEach((c, index) => {   // ← добавили index
             const tr = document.createElement("tr");
 
             tr.innerHTML = `
-                <td>${c.id}</td>
-                <td>${escapeHtml(c.title)}</td>
-                <td>${escapeHtml(c.category || "")}</td>
-                <td>${c.startDate || ""}</td>
-                <td>${c.endDate || ""}</td>
-                <td>${c.featured || c.isFeatured ? "Да" : "Нет"}</td>
-                <td>
-                    <button class="btn btn-sm btn-outline-primary me-2" data-action="edit" data-id="${c.id}">Редактировать</button>
-                    <button class="btn btn-sm btn-outline-danger" data-action="delete" data-id="${c.id}">Удалить</button>
-                </td>
-            `;
+            <td>${index + 1}</td>   <!-- красивый номер: 1,2,3,... -->
+            <td>${escapeHtml(c.title)}</td>
+            <td>${escapeHtml(c.category || "")}</td>
+            <td>${c.startDate || ""}</td>
+            <td>${c.endDate || ""}</td>
+            <td>${c.featured ? "Да" : "Нет"}</td>
+            <td>
+                <button class="btn btn-sm btn-outline-primary me-2"
+                        data-action="edit" data-id="${c.id}">Редактировать</button>
+                <button class="btn btn-sm btn-outline-danger"
+                        data-action="delete" data-id="${c.id}">Удалить</button>
+            </td>
+        `;
 
             tableBody.appendChild(tr);
         });
+
     }
 
     // === 3. Заполнение формы для редактирования ===
