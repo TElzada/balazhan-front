@@ -23,7 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // === 1. Загрузка новостей из бэка ===
     async function loadNews() {
         try {
-            const res = await fetch(`${API_BASE}/api/admin/news`);
+            const res = await fetch(`${API_BASE}/api/admin/news`, {
+                method: "GET",
+                credentials: "include"
+            });
+
+            if (res.status === 401) {
+                window.location.href = "admin-login.html";
+                return;
+            }
+
             if (!res.ok) {
                 throw new Error("Ошибка при загрузке новостей: " + res.status);
             }
@@ -152,8 +161,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             try {
                 const res = await fetch(`${API_BASE}/api/admin/news/${id}`, {
-                    method: "DELETE"
+                    method: "DELETE",
+                    credentials: "include"
                 });
+
+                if (res.status === 401) {
+                    window.location.href = "admin-login.html";
+                    return;
+                }
+
                 if (!res.ok) {
                     throw new Error("Ошибка при удалении: " + res.status);
                 }
@@ -193,13 +209,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // дата публикации: если заполнена — кладём в publishedAt
         if (publishedAtInput.value) {
-            // datetime-local → строка "yyyy-MM-ddTHH:mm"
-            // Для OffsetDateTime нужно что-то вроде "yyyy-MM-ddTHH:mm:ss+06:00"
-            const local = publishedAtInput.value; // "2025-11-24T16:46"
-
-            // если ты в Бишкеке (UTC+6), можно жёстко дописать +06:00
-            payload.publishedAt = local + ":00+06:00";
-            // получится "2025-11-24T16:46:00+06:00"
+            const local = publishedAtInput.value; // "yyyy-MM-ddTHH:mm"
+            payload.publishedAt = local + ":00+06:00"; // "2025-11-24T16:46:00+06:00"
         }
 
         if (!payload.title || !payload.slug) {
@@ -218,10 +229,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
+                credentials: "include",
                 body: JSON.stringify(payload)
             });
 
+            if (res.status === 401) {
+                window.location.href = "admin-login.html";
+                return;
+            }
+
             if (!res.ok) {
+                const errorText = await res.text();
+                console.error("Ошибка при сохранении новости:", res.status, errorText);
                 throw new Error("Ошибка при сохранении: " + res.status);
             }
 

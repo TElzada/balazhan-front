@@ -26,7 +26,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // === 1. Загрузка списка конкурсов из бэка ===
     async function loadContests() {
         try {
-            const res = await fetch(`${API_BASE}/api/admin/contests`);
+            const res = await fetch(`${API_BASE}/api/admin/contests`, {
+                method: "GET",
+                credentials: "include"
+            });
+
+            if (res.status === 401) {
+                // неавторизован — отправляем на страницу логина
+                window.location.href = "admin-login.html";
+                return;
+            }
+
             if (!res.ok) {
                 throw new Error("Ошибка при загрузке конкурсов: " + res.status);
             }
@@ -64,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td>${escapeHtml(c.category || "")}</td>
                 <td>${c.startDate || ""}</td>
                 <td>${c.endDate || ""}</td>
-                <td>${c.featured ? "Да" : "Нет"}</td>
+                <td>${c.featured || c.isFeatured ? "Да" : "Нет"}</td>
                 <td>
                     <button class="btn btn-sm btn-outline-primary me-2" data-action="edit" data-id="${c.id}">Редактировать</button>
                     <button class="btn btn-sm btn-outline-danger" data-action="delete" data-id="${c.id}">Удалить</button>
@@ -128,8 +138,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             try {
                 const res = await fetch(`${API_BASE}/api/admin/contests/${id}`, {
-                    method: "DELETE"
+                    method: "DELETE",
+                    credentials: "include"
                 });
+
+                if (res.status === 401) {
+                    window.location.href = "admin-login.html";
+                    return;
+                }
+
                 if (!res.ok) {
                     throw new Error("Ошибка при удалении: " + res.status);
                 }
@@ -169,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
             imageUrl: imageUrlInput.value.trim() || null,
             excerpt: excerptInput.value.trim() || null,
             content: contentInput.value || null,
-            featured: isFeaturedInput.checked
+            isFeatured: isFeaturedInput.checked
         };
 
         // простая валидация
@@ -189,8 +206,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
+                credentials: "include",
                 body: JSON.stringify(payload)
             });
+
+            if (res.status === 401) {
+                window.location.href = "admin-login.html";
+                return;
+            }
 
             if (!res.ok) {
                 const errorText = await res.text();
