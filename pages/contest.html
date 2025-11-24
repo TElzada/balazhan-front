@@ -14,7 +14,10 @@
 </div>
 
 <script>
-    (async function(){
+    (async function () {
+        const API_BASE = 'http://localhost:8080';
+        const DATA_URL = 'data/contests.json';
+
         const params = new URLSearchParams(location.search);
         const slug = params.get('slug');
         const container = document.getElementById('contest');
@@ -25,38 +28,139 @@
         }
 
         try {
-            const res = await fetch('data/contests.json');
-            if(!res.ok) throw new Error('Не удалось загрузить данные');
-            const list = await res.json();
-            const it = list.find(x => x.slug === slug);
-            if(!it) {
+            // грузим И бэк, И json параллельно
+            const [backendList, jsonList] = await Promise.all([
+                loadFromBackend(),
+                loadFromJson()
+            ]);
+
+            const jsonBySlug = Array.isArray(jsonList)
+                ? new Map(jsonList.map(c => [c.slug, c]))
+                : new Map();
+
+            // пробуем найти конкурс сначала в бэке
+            let it = Array.isArray(backendList)
+                ? backendList.find(c => c.slug === slug)
+                : null;
+
+            // если в бэке нет – берём из json
+            if (!it) {
+                it = jsonBySlug.get(slug) || null;
+            } else {
+                // если в бэке НЕТ stages, но в json есть – подмешиваем
+                const fromJson = jsonBySlug.get(slug);
+                const noStages =
+                    !it.stages ||
+                    (Array.isArray(it.stages) && it.stages.length === 0);
+
+                if (noStages && fromJson && Array.isArray(fromJson.stages)) {
+                    it.stages = fromJson.stages;
+                }
+            }
+
+            if (!it) {
                 container.innerHTML = '<p class="text-muted">Конкурс не найден.</p>';
                 return;
             }
 
+            renderContest(it);
+
+        } catch (e) {
+            console.error(e);
+            container.innerHTML = '<p class="text-danger">Ошибка загрузки данных.</p>';
+        }
+
+        async function loadFromBackend() {
+            try {
+                const res = await fetch(`${API_BASE}/api/contests`);
+                if (!res.ok) throw new Error('Ошибка API: ' + res.status);
+                return await res.json();
+            } catch (e) {
+                console.error('Backend error:', e);
+                return [];
+            }
+        }
+
+        async function loadFromJson() {
+            try {
+                const res = await fetch(DATA_URL);
+                if (!res.ok) throw new Error('Ошибка JSON');
+                return await res.json();
+            } catch (e) {
+                console.error('JSON error:', e);
+                return [];
+            }
+        }
+
+        function escapeHtml(s) {
+            if (!s) return '';
+            return String(s)
+                .replaceAll('&','&amp;')
+                .replaceAll('<','&lt;')
+                .replaceAll('>','&gt;')
+                .replaceAll('"','&quot;')
+                .replaceAll("'",'&#039;');
+        }
+
+        function renderContest(it) {
+            const img = it.imageUrl
+                ? `<img src="${escapeHtml(it.imageUrl)}" alt="${escapeHtml(it.title)}" class="img-fluid rounded">`
+                : '';
+
+            // аккуратно обрабатываем stages: массив или строка-json
+            let stagesArr = [];
+            if (Array.isArray(it.stages)) {
+                stagesArr = it.stages;
+            } else if (typeof it.stages === 'string') {
+                try {
+                    const parsed = JSON.parse(it.stages);
+                    if (Array.isArray(parsed)) stagesArr = parsed;
+                } catch (e) {
+                    console.warn('Не удалось распарсить stages:', e);
+                }
+            }
+
+            const stagesHtml = stagesArr.length
+                ? stagesArr.map(s => `
+                <li>
+                    <strong>${escapeHtml(s.title || '')}</strong>
+                    — ${escapeHtml(s.date || '')}: ${escapeHtml(s.description || '')}
+                </li>
+              `).join('')
+                : '<li class="text-muted">Этапы не указаны.</li>';
+
+            const datesText = [
+                it.startDate ? `С ${escapeHtml(it.startDate)}` : '',
+                it.endDate ? `по ${escapeHtml(it.endDate)}` : ''
+            ].filter(Boolean).join(' ');
+
+            const categoryText =
+                it.category === 'teacher'
+                    ? 'Для педагогов'
+                    : it.category === 'kid'
+                        ? 'Для детей'
+                        : 'Для всех';
+
             container.innerHTML = `
           <div class="row g-4">
             <div class="col-12 col-md-4">
-              ${ it.imageUrl ? `<img src="${it.imageUrl}" alt="${it.title}" class="img-fluid rounded">` : '' }
-              <div class="mt-3"><strong>Сроки:</strong> ${it.startDate || ''} ${it.endDate ? '— ' + it.endDate : ''}</div>
-              <div class="mt-2"><strong>Категория:</strong> ${it.category === 'teacher' ? 'Для педагогов' : it.category === 'kid' ? 'Для детей' : 'Для всех'}</div>
+              ${img}
+              <div class="mt-3"><strong>Сроки:</strong> ${datesText}</div>
+              <div class="mt-2"><strong>Категория:</strong> ${categoryText}</div>
             </div>
             <div class="col-12 col-md-8">
-              <h2>${it.title}</h2>
-              <p class="lead">${it.excerpt || ''}</p>
+              <h2>${escapeHtml(it.title)}</h2>
+              <p class="lead">${escapeHtml(it.excerpt || '')}</p>
               <hr>
               <h5>Этапы</h5>
               <ul>
-                ${ (it.stages || []).map(s => `<li><strong>${s.title}</strong> — ${s.date}: ${s.description}</li>`).join('') }
+                ${stagesHtml}
               </ul>
               <hr>
               <div>${it.content || ''}</div>
             </div>
           </div>
         `;
-        } catch (e) {
-            console.error(e);
-            container.innerHTML = '<p class="text-danger">Ошибка загрузки данных.</p>';
         }
     })();
 </script>

@@ -14,38 +14,92 @@
 </main>
 
 <script>
-  (async function(){
+  (async function () {
+    const API_BASE = 'http://localhost:8080';
+    const DATA_URL = 'data/news.json';
+
     const params = new URLSearchParams(location.search);
     const slug = params.get('slug');
     const container = document.getElementById('newsArticle');
 
-    if(!slug) {
+    if (!slug) {
       container.innerHTML = '<p class="text-danger">Не указан slug новости.</p>';
       return;
     }
 
     try {
-      const res = await fetch('data/news.json');
-      if(!res.ok) throw new Error('Не удалось загрузить news.json');
-      const list = await res.json();
-      const it = list.find(x => x.slug === slug);
-      if(!it) {
+      // 1) сначала пробуем найти новость в списке, который отдаёт бэк
+      let it = await loadFromBackendList(slug);
+
+      // 2) если не нашли или бэк не отвечает — пробуем старый JSON
+      if (!it) {
+        it = await loadFromJson(slug);
+      }
+
+      if (!it) {
         container.innerHTML = '<p class="text-muted">Новость не найдена.</p>';
         return;
       }
 
-      container.innerHTML = `
-        <div class="card p-3">
-          ${ it.imageUrl ? `<img src="${it.imageUrl}" alt="${it.title}" class="img-fluid mb-3 rounded">` : '' }
-          <h1>${it.title}</h1>
-          <div class="text-muted small mb-2">${it.date}</div>
-          <div class="mb-3">${it.content || ''}</div>
-        </div>
-      `;
-
+      renderArticle(it);
     } catch (e) {
       console.error(e);
       container.innerHTML = '<p class="text-danger">Ошибка загрузки новости.</p>';
+    }
+
+    async function loadFromBackendList(slug) {
+      try {
+        const res = await fetch(`${API_BASE}/api/news`);
+        if (!res.ok) {
+          throw new Error('Ошибка при загрузке новостей с бэка: ' + res.status);
+        }
+        const list = await res.json();
+        if (!Array.isArray(list)) return null;
+        return list.find(x => x.slug === slug) || null;
+      } catch (e) {
+        console.error('Ошибка при загрузке из /api/news', e);
+        return null;
+      }
+    }
+
+    async function loadFromJson(slug) {
+      try {
+        const res = await fetch(DATA_URL);
+        if (!res.ok) throw new Error('Не удалось загрузить ' + DATA_URL);
+        const list = await res.json();
+        if (!Array.isArray(list)) return null;
+        return list.find(x => x.slug === slug) || null;
+      } catch (e) {
+        console.error('Ошибка при загрузке из JSON', e);
+        return null;
+      }
+    }
+
+    function renderArticle(it) {
+      const imgHtml = it.imageUrl
+              ? `<img src="${escapeHtml(it.imageUrl)}" alt="${escapeHtml(it.title || '')}" class="img-fluid mb-3 rounded">`
+              : '';
+
+      const dateText = it.date || it.publishedAt || it.published_at || '';
+
+      container.innerHTML = `
+        <div class="card p-3">
+          ${imgHtml}
+          <h1>${escapeHtml(it.title || '')}</h1>
+          <div class="text-muted small mb-2">${escapeHtml(dateText)}</div>
+          <div class="mb-3">${it.content || ''}</div>
+        </div>
+      `;
+    }
+
+    function escapeHtml(s) {
+      if (!s) return '';
+      return String(s)
+              .replaceAll('&', '&amp;')
+              .replaceAll('<', '&lt;')
+              .replaceAll('>', '&gt;')
+              .replaceAll('"', '&quot;')
+              .replaceAll("'", '&#039;');
     }
   })();
 </script>
