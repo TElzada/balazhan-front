@@ -26,6 +26,16 @@ header.navbar {
 .nav-link:hover {
     color: #F2D965 !important; /* Golden Custard */
 }
+/* Активный пункт меню */
+.nav-link.active {
+    color: #F2D965 !important;       /* Golden Custard */
+    position: relative;
+}
+
+/* В тёмной теме пусть остаётся читаемым */
+.dark-theme .nav-link.active {
+    color: #F2D965 !important;
+}
 
 /* ===== ТЕКСТЫ ===== */
 
@@ -128,27 +138,6 @@ header.navbar {
     transform: scale(1.1);
 }
 
-/* Кнопка смены темы в хедере */
-.theme-toggle {
-    margin-left: 20px;
-    border: none;
-    background: #929FC1; /* Serenity Blue */
-    color: #FEFEF2;       /* Pure Light */
-    width: 38px;
-    height: 38px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: 0.25s;
-
-    box-shadow: 0 4px 10px rgba(0,0,0,0.12); /* лёгкая 3D тень */
-}
-
 .theme-toggle:hover {
     background: #F2D965;   /* Golden Custard */
     color: #929FC1;
@@ -161,37 +150,3 @@ header.navbar {
     from { opacity: 0; transform: translateY(25px); }
     to { opacity: 1; transform: translateY(0); }
 }
-
-
-/* 🌙 Dark Theme */
-.dark-theme {
-    background-color: #3B3F54; /* мягкий фиолетово-серый */
-    color: #FEFEF2;
-}
-
-.dark-theme header {
-    background: #2C2F3E;
-}
-
-.dark-theme .card {
-    background: #4A4F69;
-    color: #FEFEF2;
-    box-shadow: 6px 6px 16px rgba(0,0,0,0.35),
-                -6px -6px 16px rgba(255,255,255,0.06);
-}
-.dark-theme .card-text {
-    color: #FFFFFF  ;
-}
-.dark-theme .card-title {
-    color: #FFFFFF  ;
-}
-
-.dark-theme .btn {
-    background: #F2D965;
-    color: #3B3F54;
-}
-
-.dark-theme .nav-link {
-    color: #FEFEF2 !important;
-}
-
