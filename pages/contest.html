@@ -120,14 +120,24 @@
                 }
             }
 
-            const stagesHtml = stagesArr.length
-                ? stagesArr.map(s => `
-                <li>
-                    <strong>${escapeHtml(s.title || '')}</strong>
-                    — ${escapeHtml(s.date || '')}: ${escapeHtml(s.description || '')}
-                </li>
-              `).join('')
-                : '<li class="text-muted">Этапы не указаны.</li>';
+            // если этапов нет вообще — НЕ показываем блок "Этапы"
+            let stagesBlock = '';
+            if (stagesArr.length > 0) {
+                const stagesHtml = stagesArr.map(s => `
+                    <li>
+                        <strong>${escapeHtml(s.title || '')}</strong>
+                        — ${escapeHtml(s.date || '')}: ${escapeHtml(s.description || '')}
+                    </li>
+                `).join('');
+
+                stagesBlock = `
+                    <hr>
+                    <h5>Этапы</h5>
+                    <ul>
+                        ${stagesHtml}
+                    </ul>
+                `;
+            }
 
             const datesText = [
                 it.startDate ? `С ${escapeHtml(it.startDate)}` : '',
@@ -151,11 +161,7 @@
             <div class="col-12 col-md-8">
               <h2>${escapeHtml(it.title)}</h2>
               <p class="lead">${escapeHtml(it.excerpt || '')}</p>
-              <hr>
-              <h5>Этапы</h5>
-              <ul>
-                ${stagesHtml}
-              </ul>
+              ${stagesBlock}
               <hr>
               <div>${it.content || ''}</div>
             </div>
