@@ -118,39 +118,70 @@
             grid.appendChild(col);
 
             // modal
+            // modal
             const modal = document.createElement('div');
             modal.className = 'modal fade';
             modal.id = `modal-${escapeId(it.slug)}`;
             modal.tabIndex = -1;
             modal.setAttribute('aria-hidden', 'true');
 
-            const stagesHtml = (it.stages || []).map(s => `<li><strong>${escape(s.title)}</strong> — ${escape(s.date)}: ${escape(s.description)}</li>`).join('');
+// аккуратно достаём stages: массив или строка JSON
+            let stagesArr = [];
+            if (Array.isArray(it.stages)) {
+                stagesArr = it.stages;
+            } else if (typeof it.stages === 'string') {
+                try {
+                    const parsed = JSON.parse(it.stages);
+                    if (Array.isArray(parsed)) stagesArr = parsed;
+                } catch (e) {
+                    console.warn('Не удалось распарсить stages:', e);
+                }
+            }
+
+// если этапов нет — вообще не показываем блок "Этапы"
+            let stagesBlock = '';
+            if (stagesArr.length > 0) {
+                const stagesHtml = stagesArr.map(s => `
+        <li>
+            <strong>${escape(s.title || '')}</strong>
+            — ${escape(s.date || '')}: ${escape(s.description || '')}
+        </li>
+    `).join('');
+
+                stagesBlock = `
+        <hr>
+        <div><strong>Этапы:</strong>
+          <ul>${stagesHtml}</ul>
+        </div>
+    `;
+            }
+
             modal.innerHTML = `
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">${escape(it.title)}</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              ${ it.imageUrl ? `<img src="${escape(it.imageUrl)}" alt="${escape(it.title)}" class="img-fluid mb-3">` : '' }
-              <p class="mb-1"><strong>Сроки:</strong> ${escape(it.startDate||'')} ${it.endDate ? '— ' + escape(it.endDate) : ''}</p>
-              <p><strong>Кратко:</strong> ${escape(it.excerpt||'')}</p>
-              <hr>
-              <div><strong>Этапы:</strong>
-                <ul>${stagesHtml}</ul>
-              </div>
-              <hr>
-              <div class="full-content">${it.content || ''}</div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-              <a class="btn btn-primary" href="contest.html?slug=${encodeURIComponent(it.slug)}">Перейти на полную страницу</a>
-            </div>
-          </div>
-        </div>`;
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">${escape(it.title)}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ${ it.imageUrl ? `<img src="${escape(it.imageUrl)}" alt="${escape(it.title)}" class="img-fluid mb-3">` : '' }
+          <p class="mb-1"><strong>Сроки:</strong> ${escape(it.startDate || '')} ${it.endDate ? '— ' + escape(it.endDate) : ''}</p>
+          <p><strong>Кратко:</strong> ${escape(it.excerpt || '')}</p>
+
+          ${stagesBlock}
+
+          <hr>
+          <div class="full-content">${it.content || ''}</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+          <a class="btn btn-primary" href="contest.html?slug=${encodeURIComponent(it.slug)}">Перейти на полную страницу</a>
+        </div>
+      </div>
+    </div>`;
 
             modalsContainer.appendChild(modal);
+
         });
 
         loadMoreBtn.style.display = visibleCount < filtered.length ? 'inline-block' : 'none';
