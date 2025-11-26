@@ -200,6 +200,12 @@ header.navbar {
 
     object-fit: contain;
 }
+.about-img {
+    max-width: 60%;      /* ограничиваем ширину */
+    height: auto;        /* сохраняем пропорции */
+    border-radius: 12px; /* можно убрать, если не нужно */
+}
+
 
 
 
