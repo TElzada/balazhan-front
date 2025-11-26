@@ -260,4 +260,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // === старт: грузим конкурсы ===
     loadContests();
+    function toIsoDate(d) {
+        if (!d) return null;
+        // ожидаем "DD/MM/YYYY"
+        const [day, month, year] = d.split('/');
+        return `${year}-${month}-${day}`;  // "YYYY-MM-DD"
+    }
 });
