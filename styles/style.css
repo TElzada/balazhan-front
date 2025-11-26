@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background: #00000;        /* Pure Light */
+    background: #00000;
     color: #3a3a3a;
     margin: 0;
     padding: 0;
@@ -12,29 +12,26 @@ body {
 /* ===== HEADER ===== */
 
 header.navbar {
-    background: #CAE8C8 !important; /* Serenity Blue */
+    background: #E3F2FD !important;
     box-shadow: 0 4px 18px rgba(0,0,0,0.15);
     padding: 15px 0;
 }
 
+/* Пункты меню */
 .nav-link {
-    color: white !important;
+    color: #1565C0 !important;
     font-weight: 600;
     font-size: 17px;
 }
 
 .nav-link:hover {
-    color: #ffcc00 !important; /* Golden Custard */
+    color: #FFB300 !important; /* Golden Custard */
 }
 /* Активный пункт меню */
 .nav-link.active {
-    color: #929FC1 !important;       /* Golden Custard */
+    color: #03205e !important;
+    font-weight: 700; /* Golden Custard */
     position: relative;
-}
-
-/* В тёмной теме пусть остаётся читаемым */
-.dark-theme .nav-link.active {
-    color: #F2D965 !important;
 }
 
 /* ===== ТЕКСТЫ ===== */
@@ -42,7 +39,7 @@ header.navbar {
 .section-title {
     font-size: 38px;
     font-weight: 800;
-    color: #929FC1;
+    color: #03205e;
     text-align: center;
     margin-bottom: 40px;
 }
@@ -87,8 +84,8 @@ header.navbar {
 /* ===== КНОПКИ ===== */
 
 .btn-outline-primary {
-    background: #ffcc00;  /* Golden Custard */
-    color: #000 !important;
+    background: #1976D2 ;  /* Golden Custard */
+    color: white !important;
     font-weight: 700;
     border: none;
     border-radius: 14px;
@@ -98,7 +95,7 @@ header.navbar {
 }
 
 .btn-outline-primary:hover {
-    background: #929FC1; /* Serenity Blue */
+    background: #FFB300;  //bpv
     color: white !important;
     transform: scale(1.06);
 }
@@ -106,8 +103,8 @@ header.navbar {
 /* ===== FOOTER ===== */
 
 .footer {
-    background: #CAE8C8;
-    color: white;
+    background: #E3F2FD;
+    color: #1565C0;
     padding: 40px 0;
     margin-top: 60px;
     box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
@@ -117,33 +114,6 @@ header.navbar {
     color: #F2D965;
     font-weight: 600;
 }
-
-
-
-
-/* === КНОПКА НАВЕРХ === */
-.to-top-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    padding: 14px 18px;
-    background: #6c5ce7;
-    border-radius: 50%;
-    color: white;
-    border: none;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-    transition: 0.3s;
-}
-.to-top-btn:hover {
-    transform: scale(1.1);
-}
-
-.theme-toggle:hover {
-    background: #F2D965;   /* Golden Custard */
-    color: #929FC1;
-    transform: translateY(-2px);
-}
-
 
 /* === АНИМАЦИЯ === */
 @keyframes fadeUp {
@@ -171,7 +141,7 @@ header.navbar {
 
 .contest-btn {
     display: inline-block;
-    background-color: #7b2cbf;   /* яркий оранжево-красный */
+    background-color: #1976D2;
     color: white !important;
     padding: 10px 18px;
     border-radius: 8px;
@@ -181,7 +151,7 @@ header.navbar {
 }
 
 .contest-btn:hover {
-    background-color: #ff5722;   /* темнее при наведении */
+    background-color: #FFB300;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 87, 34, 0.4);
 }
@@ -190,9 +160,9 @@ header.navbar {
     transform: translateY(0);
     box-shadow: none;
 }
-.btn contest-btn {
+.btn.contest-btn {
     display: inline-block;
-    background-color: #7b2cbf;   /* яркий оранжево-красный */
+    background-color: #1976D2;
     color: white !important;
     padding: 10px 18px;
     border-radius: 8px;
@@ -201,13 +171,13 @@ header.navbar {
     transition: 0.3s ease;
 }
 
-.btn contest-btn:hover {
-    background-color: #ff5722;   /* темнее при наведении */
+.btn.contest-btn:hover {
+    background-color: #FFB300;   /* темнее при наведении */
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 87, 34, 0.4);
 }
 
-.btn contest-btn:active {
+.btn.contest-btn:active {
     transform: translateY(0);
     box-shadow: none;
 }
