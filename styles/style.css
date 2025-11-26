@@ -211,5 +211,25 @@ header.navbar {
     transform: translateY(0);
     box-shadow: none;
 }
+/* универсальная адаптивная картинка */
+.responsive-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain; /* или cover — если хочешь, чтобы красиво обрезало */
+}
+.footer-logos {
+    display: block;
+    margin: 0 auto;
+
+    /* чтобы не был гигантским */
+    max-width: 100%;
+    height: auto;
+    max-height: 120px; /* можешь поиграться: 120–160px */
+
+    object-fit: contain;
+}
+
 
 
