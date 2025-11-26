@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background: #FEFEF2;        /* Pure Light */
+    background: #00000;        /* Pure Light */
     color: #3a3a3a;
     margin: 0;
     padding: 0;
@@ -12,7 +12,7 @@ body {
 /* ===== HEADER ===== */
 
 header.navbar {
-    background: #929FC1 !important; /* Serenity Blue */
+    background: #CAE8C8 !important; /* Serenity Blue */
     box-shadow: 0 4px 18px rgba(0,0,0,0.15);
     padding: 15px 0;
 }
@@ -24,11 +24,11 @@ header.navbar {
 }
 
 .nav-link:hover {
-    color: #F2D965 !important; /* Golden Custard */
+    color: #ffcc00 !important; /* Golden Custard */
 }
 /* Активный пункт меню */
 .nav-link.active {
-    color: #F2D965 !important;       /* Golden Custard */
+    color: #929FC1 !important;       /* Golden Custard */
     position: relative;
 }
 
@@ -87,7 +87,7 @@ header.navbar {
 /* ===== КНОПКИ ===== */
 
 .btn-outline-primary {
-    background: #F2D965;  /* Golden Custard */
+    background: #ffcc00;  /* Golden Custard */
     color: #000 !important;
     font-weight: 700;
     border: none;
@@ -106,7 +106,7 @@ header.navbar {
 /* ===== FOOTER ===== */
 
 .footer {
-    background: #929FC1;
+    background: #CAE8C8;
     color: white;
     padding: 40px 0;
     margin-top: 60px;
@@ -168,4 +168,48 @@ header.navbar {
     height: 100%;
     border: 0;
 }
+
+.contest-btn {
+    display: inline-block;
+    background-color: #7b2cbf;   /* яркий оранжево-красный */
+    color: white !important;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.contest-btn:hover {
+    background-color: #ff5722;   /* темнее при наведении */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 87, 34, 0.4);
+}
+
+.contest-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+.btn contest-btn {
+    display: inline-block;
+    background-color: #7b2cbf;   /* яркий оранжево-красный */
+    color: white !important;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.btn contest-btn:hover {
+    background-color: #ff5722;   /* темнее при наведении */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 87, 34, 0.4);
+}
+
+.btn contest-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
 
