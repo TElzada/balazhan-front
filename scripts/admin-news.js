@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8080"; // такой же, как в admin-contests.js
+const API_BASE = "https://balajan-back.onrender.com"; // такой же, как в admin-contests.js
 
 document.addEventListener("DOMContentLoaded", () => {
     const tableBody = document.getElementById("newsTableBody");

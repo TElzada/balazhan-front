@@ -1,5 +1,5 @@
 (async function () {
-    const API_BASE = 'http://localhost:8080';
+    const API_BASE = 'https://balajan-back.onrender.com';
     const FALLBACK_JSON = '../pages/data/news.json';
     const grid = document.getElementById('homeNewsGrid');
     if (!grid) return;

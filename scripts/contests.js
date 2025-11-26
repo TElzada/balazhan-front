@@ -4,7 +4,7 @@
     const PAGE_SIZE = 6;
 
     // ==== БЛОК ДЛЯ ПОДКЛЮЧЕНИЯ К БЭКУ (КОНКУРСЫ) ====
-    const API_BASE = 'http://localhost:8080'; // при необходимости поменяешь на свой домен/порт
+    const API_BASE = 'https://balajan-back.onrender.com'; // при необходимости поменяешь на свой домен/порт
 
     // Получить конкурсы с бэка (Spring)
     async function loadContestsFromBackend() {

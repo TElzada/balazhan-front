@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8080"; // если поменяете порт/домен, поменяешь тут
+const API_BASE = "https://balajan-back.onrender.com"; // если поменяете порт/домен, поменяешь тут
 
 document.addEventListener("DOMContentLoaded", () => {
     const tableBody = document.getElementById("contestsTableBody");

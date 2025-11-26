@@ -1,5 +1,5 @@
 (function () {
-    const API_BASE = 'http://localhost:8080';
+    const API_BASE = 'https://balajan-back.onrender.com';
     const DATA_URL = '../pages/data/contests.json'; // запасной JSON
     const MAX_SHOW = 3;
 

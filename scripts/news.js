@@ -1,7 +1,7 @@
 // ==== БЛОК ДЛЯ ПОДКЛЮЧЕНИЯ К БЭКУ (НОВОСТИ) ====
 
 // если другой адрес бэка — поменяешь тут
-const API_BASE = 'http://localhost:8080';
+const API_BASE = 'https://balajan-back.onrender.com';
 
 // Получить новости с бэка (Spring)
 async function loadNewsFromBackend() {
